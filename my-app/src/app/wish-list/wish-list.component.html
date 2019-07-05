@@ -1,0 +1,21 @@
+<h3>Cart</h3>
+
+<button class="button" type="button" (click) = "clearAllCart()">
+        Delete All
+</button>
+
+<p>
+    <a routerLink="/shipping">Shipping Prices</a>
+</p>
+
+<div class="cart-item" *ngFor="let item of items">\
+    <span>
+        {{ item.name }}
+    </span>
+    <span>
+        {{ item.price | currency }}
+    </span>
+    <button class="button" type="button" (click) = "clearOne(items.indexOf(item))">
+            Delete One
+    </button>
+</div>
