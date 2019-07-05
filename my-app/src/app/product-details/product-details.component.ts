@@ -28,4 +28,8 @@ export class ProductDetailsComponent implements OnInit {
     this.cartService.addToCart(product);
   }
 
+  isInCart(product) {
+    return this.cartService.items.includes(product);
+  }
+
 }
