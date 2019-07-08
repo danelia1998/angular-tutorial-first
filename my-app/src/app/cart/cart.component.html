@@ -59,12 +59,38 @@
         Customer
     </h3>
     <p>
-        Name: {{ checkoutForm.controls.name.value }}
+        Name: {{ name.value }}
     </p>
     <p>
-        Address: {{ checkoutForm.controls.address.value | json }}
+        Address: {{ address.value | json }}
+        City: {{city.value}}
+        State: {{state.value}}
+        Zip: {{zip.value}}
     </p>
     <p>
         Form Status {{ checkoutForm.status }}
     </p>
+</div>
+
+<div>
+    <h3>Errors :</h3>
+    <div *ngIf = "address.invalid && (address.dirty || address.touched)">
+        <div *ngIf="!address.errors?.zipStatus">
+            Zip lenght should be less than 3 !
+        </div>
+        <div *ngIf="!address.errors?.cityStatus">
+            City name should start with A !
+        </div>
+    </div>
+    <div *ngIf = "name.invalid && (name.dirty || name.touched)">
+        <div *ngIf = "name.errors.required">
+            Name Is Required !
+        </div>
+        <div *ngIf = "name.errors.minlength">
+            Name must be at least 4 characters long !
+        </div>
+        <div *ngIf = "name.errors.forbiddenName?.invalid">
+            Name can't be like an {{ name.value }}
+        </div>
+    </div>
 </div>
