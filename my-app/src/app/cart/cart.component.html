@@ -25,14 +25,31 @@
         <label>Name</label>
         <input type="text" formControlName="name">
     </div>
-    <div>
-        <label>Address</label>
-        <input type="text" formControlName="address">
+    <div formGroupName="address">
+        <h3>Address</h3>
+        
+        <label>
+            Street:
+            <input type="text" formControlName="street">
+        </label>
+        <label>
+            City:
+            <input type="text" formControlName="city">
+        </label>
+        <label>
+            State:
+            <input type="text" formControlName="state">
+        </label>
+        <label>
+            Zip Code:
+            <input type="text" formControlName="zip">
+        </label>
+
     </div>
     <button class="button" type="submit">Purchase</button>
     <p>
         <button class="button" type="button" (click) = "setDefault()">
-            Reset
+            Reset Name
         </button>
     </p>
 </form>
@@ -45,6 +62,6 @@
         Name: {{ checkoutForm.controls.name.value }}
     </p>
     <p>
-        Address: {{ checkoutForm.controls.address.value }}
+        Address: {{ checkoutForm.controls.address.value | json }}
     </p>
 </div>

@@ -19,7 +19,12 @@ export class CartComponent implements OnInit {
 
     this.checkoutForm = this.formBuilder.group({
       name: '',
-      address: '',
+      address: this.formBuilder.group({
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+      })
     });
   }
 
@@ -40,8 +45,7 @@ export class CartComponent implements OnInit {
 
   setDefault() {
     this.checkoutForm.patchValue({
-      name: 'John Doe',
-      address: 'Kyiv'
+      name: 'John Doe'
     });
   }
 
