@@ -1,0 +1,13 @@
+<h3>User Information</h3>
+<div  *ngFor = "let user of users" style="margin: 30px">
+    <p>  <span>E-mail: </span> {{user.email}}</p>
+    <p> <span>Nickname: </span> {{user.nickname}}</p>
+    <p> <span>Phone: </span> {{user.phone}}</p>
+    <p> <span>Website: </span> {{user.website}}</p>
+    <div> 
+        <button (click)="deleteUser(user)" class="button fancy-button ">
+            <i class="material-icons">delete</i>
+            Delete user
+        </button>
+    </div>
+</div>

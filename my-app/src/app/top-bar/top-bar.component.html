@@ -1,8 +1,11 @@
-<a [routerLink]="['/']">
+<a [routerLink] = "['/']">
     <h1>My Store</h1>
 </a>
-
-<s [routerLink]="['/cart']" class="button fancy-button">
-    <i class="material-icons">shopping_cart</i>
-    Checkout
-</s>
+<div>
+    <a [routerLink] = '["/register"]'class = 'button fancy-button user' style="margin-right: 30px">Registration</a>
+    <a [routerLink] = '["/users"]'class = 'button fancy-button user' style="margin-right: 20px">Users</a>
+    <a [routerLink] = "['/cart']" class="button fancy-button" >
+        <i class="material-icons">shopping_cart</i>
+        Checkout
+    </a>
+</div>

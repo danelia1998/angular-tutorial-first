@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+   FormBuilder,
+    Validators,
+    FormControl,
+    FormGroup } from '@angular/forms';
 import { CartService } from '../cart.service';
-import { FormBuilder, Validator, Validators, FormControl, FormGroup } from '@angular/forms';
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -9,16 +12,15 @@ import { FormBuilder, Validator, Validators, FormControl, FormGroup } from '@ang
 })
 export class CartComponent implements OnInit {
   items;
-  checkoutForm: FormGroup;
+  checkoutForm;
 
   constructor(
     private cartService: CartService,
     private formBuilder: FormBuilder
   ) {
-    this.items = this.cartService.getItems();
-
+    this.items = this.cartService.getitems();
     this.checkoutForm = this.formBuilder.group({
-      name: ['', [this.forbiddenName(), Validators.minLength(4)]],
+      name: ['', [this.forbiddenName(), Validators.minLength(4)] ],
       address: this.formBuilder.group({
         street: '',
         city: '',
@@ -56,22 +58,13 @@ export class CartComponent implements OnInit {
   forbiddenName() {
     return (formControl) => {
       return formControl.value === 'Oliver' ? {forbiddenName: {invalid: true}} : null;
-    }
+    };
   }
 
-  onSubmit(customerData) {
-    console.warn('Your order has been submitted', customerData);
-
+  onSubmit(customeerdata) {
+    console.warn('Your order has been submitted', customeerdata);
     this.items = this.cartService.clearCart();
     this.checkoutForm.reset();
-  }
-
-  clearAllCart() {
-    this.items = this.cartService.clearCart();
-  }
-
-  clearOne(item) {
-    this.cartService.getOneItem(item);
   }
 
   setDefault() {
@@ -83,6 +76,14 @@ export class CartComponent implements OnInit {
   ngOnInit() {
   }
 
+  remove(id) {
+    this.items = this.cartService.remove(id);
+  }
+
+  clearCart() {
+    this.items = this.cartService.clearCart();
+  }
+
   get name() {
     return this.checkoutForm.get('name') as FormControl;
   }
@@ -91,14 +92,15 @@ export class CartComponent implements OnInit {
     return this.checkoutForm.get('address') as FormGroup;
   }
 
-  get city() {
-    return this.checkoutForm.get('address').get('city') as FormControl;
-  }
-
   get zip() {
     return this.checkoutForm.get('address').get('zip') as FormControl;
+  }
+
+  get city() {
+    return this.checkoutForm.get('address').get('city') as FormControl;
   }
   get state() {
     return this.checkoutForm.get('address').get('state') as FormControl;
   }
+
 }
