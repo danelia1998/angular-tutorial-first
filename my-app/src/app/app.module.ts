@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
+import { CurrencyComponent } from './currency/currency.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UsersComponent } from './users/users.component';
     WishlistComponent,
     RegisterComponent,
     UsersComponent,
+    CurrencyComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +43,8 @@ import { UsersComponent } from './users/users.component';
       {path: 'shipping', component: ShippingComponent},
       { path: 'wishlist', component: WishlistComponent },
       {path: 'register', component: RegisterComponent},
-      {path: 'users', component: UsersComponent}
-
+      {path: 'users', component: UsersComponent},
+      {path: 'currency', component: CurrencyComponent}
 
     ])
   ],
