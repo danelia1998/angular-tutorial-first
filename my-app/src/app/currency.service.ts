@@ -7,28 +7,60 @@ import { data } from './rates';
 })
 export class CurrencyService {
   result;
+  Observer;
 
   constructor() {
-    this.result = data.rates;
+    this.result = this.transformObjectToArray(data.rates);
+
+    this.Observer = {
+      result: this.result,
+      subscribe: this.subscribe,
+      filter: this.filter,
+      map: this.map
+    };
   }
 
-  subscribe(next, complete) {
-    let i = 0;
-    const keys  = Object.keys(this.result);
-    const size = keys.length;
+  transformObjectToArray(obj) {
+    const items = [];
+    const keys = Object.keys(obj);
 
     for (const key of keys) {
-      const value  = this.result[key];
+      const value = obj[key];
+
       const item = {
         currency: key,
         value
       };
+
+      items.push(item);
+    }
+    return items;
+  }
+
+  filter( cb ) {
+    this.result = this.result.filter(cb);
+
+    return this;
+  }
+
+  map( cb ) {
+    this.result = this.result.map(cb);
+
+    return this;
+  }
+
+  subscribe(next, complete) {
+    let i = 0;
+    const size = this.result.length;
+
+    for (const item of this.result) {
       setTimeout(() => {
         next(item);
       }, i * 500);
 
       i++;
     }
+
     setTimeout(() => {
       complete(size);
     }, i * 500);

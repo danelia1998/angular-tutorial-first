@@ -20,9 +20,19 @@ export class CurrencyComponent implements OnInit {
     };
     const complete = (length) => {
       this.length = length;
-    }
+    };
 
-    const observable = this.currencyService.subscribe(action, complete);
+    const filterCallback = ({ value }) => value > 2;
+
+    const mapCallback = ({currency, value}) => ({icon : '🏦', currency, value});
+
+    const Observer = this.currencyService.Observer;
+
+    const observable = Observer
+    .filter(filterCallback)
+    .map(mapCallback)
+    .subscribe(action, complete);
+
   }
 
 }
