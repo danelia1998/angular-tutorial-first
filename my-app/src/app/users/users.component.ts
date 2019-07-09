@@ -19,8 +19,7 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(user) {
-// tslint:disable-next-line: max-line-length
-    if(!confirm(`You sure you want to remove ${this.registerService.getusers()}?`)) {
+    if (!confirm(`You sure you want to remove ${user.email}?`)) {
       return true;
     }
     this.registerService.deleteUser(user);
