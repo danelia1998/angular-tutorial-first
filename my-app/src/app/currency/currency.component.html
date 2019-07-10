@@ -1,7 +1,11 @@
-<h1>Currency Rate</h1>
+<h1>Currency rates</h1>
 
-<ul *ngFor=" let rate of rates">
-    <li>{{ rate.icon }}<b>{{ rate.currency }}</b>:{{ rate.value }}</li>
+<ul>
+    <li *ngFor="let rate of rates">
+        <b>{{rate.icon}} {{rate.currency}}</b> : {{rate.value}}
+    </li>
 </ul>
 
-<p *ngIf = "length">We receiver : {{ length }} items</p>
+<p *ngIf="length">
+    We recieved: {{length}} items
+</p>

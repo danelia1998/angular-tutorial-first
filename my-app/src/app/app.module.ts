@@ -1,52 +1,59 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {RouterModule} from '@angular/router';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { ProductAlertComponent } from './product-alerts/product-alerts.component';
+import { RouterModule } from '@angular/router';
+import { ProductAlertsComponent } from './product-alerts/product-alerts.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { HttpClientModule } from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
-import { WishlistComponent } from './wishlist/wishlist.component';
-import { RegisterComponent } from './register/register.component';
-import { UsersComponent } from './users/users.component';
+import { WishListComponent } from './wish-list/wish-list.component';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CurrencyComponent } from './currency/currency.component';
+import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     ProductListComponent,
-    ProductAlertComponent,
+    ProductAlertsComponent,
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    WishlistComponent,
-    RegisterComponent,
-    UsersComponent,
+    WishListComponent,
+    UserRegisterComponent,
+    UsersListComponent,
+    UserEditComponent,
+    ConfirmationDialogComponent,
     CurrencyComponent,
+    CurrencyConverterComponent,
   ],
   imports: [
-    BrowserModule,
     HttpClientModule,
+    BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot([
+      { path: '', component: ProductListComponent },
+      { path: 'products/:productId', component: ProductDetailsComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'shipping', component: ShippingComponent },
+      { path: 'register', component: UserRegisterComponent },
+      { path: 'users', component: UsersListComponent },
+      { path: 'users/edit/:userId', component: UserEditComponent },
+      { path: 'currency', component: CurrencyComponent },
+      { path: 'currency-converter', component: CurrencyConverterComponent }
+    ]),
     ReactiveFormsModule,
-    RouterModule.forRoot( [
-      {path: '', component: ProductListComponent},
-      {path: 'products/:productId', component: ProductDetailsComponent},
-      {path: 'cart', component: CartComponent},
-      {path: 'shipping', component: ShippingComponent},
-      { path: 'wishlist', component: WishlistComponent },
-      {path: 'register', component: RegisterComponent},
-      {path: 'users', component: UsersComponent},
-      {path: 'currency', component: CurrencyComponent}
-
-    ])
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

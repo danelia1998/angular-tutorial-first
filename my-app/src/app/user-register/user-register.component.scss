@@ -1,0 +1,43 @@
+app-user-register {
+  width: 100%;
+
+  form {
+    width: 960px;
+    margin: auto;
+    justify-content: flex-end;
+
+    > div {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 20px 0;
+
+      input {
+        width: 60%;
+        margin-left: 12px;
+        margin-bottom: 0px;
+      }
+
+      .error {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      &.password-group {
+        display: flex;
+        flex-direction: column;
+
+        > div {
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: baseline;
+          flex-wrap: wrap;
+          margin: 20px 0;
+        }
+      }
+    }
+  }
+}

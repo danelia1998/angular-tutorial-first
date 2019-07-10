@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-   FormBuilder,
-    Validators,
-    FormControl,
-    FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from "@angular/forms";
 import { CartService } from '../cart.service';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -12,95 +9,82 @@ import { CartService } from '../cart.service';
 })
 export class CartComponent implements OnInit {
   items;
-  checkoutForm;
+  checkedForm;
 
   constructor(
     private cartService: CartService,
     private formBuilder: FormBuilder
   ) {
-    this.items = this.cartService.getitems();
-    this.checkoutForm = this.formBuilder.group({
-      name: ['', [this.forbiddenName(), Validators.minLength(4)] ],
-      address: this.formBuilder.group({
+    this.items = this.cartService.getItems();
+    this.checkedForm = formBuilder.group({
+      name: ['', [Validators.minLength(4), this.forbiddenName()]],
+      address: formBuilder.group({
         street: '',
         city: '',
         state: '',
         zip: ''
       }, {
-        validators: this.crossValidation
-      })
-    });
-  }
-
-  static isZipValid(zip) {
-    return zip.length < 3;
-  }
-
-  static isCityValid(city) {
-    return city && city[0].toLowerCase() === 'a';
-  }
-
-  crossValidation(formGroup) {
-    const zip = formGroup.get('zip').value;
-    const zipStatus = CartComponent.isZipValid(zip);
-
-    const city = formGroup.get('city').value;
-    const cityStatus = CartComponent.isCityValid(city);
-
-    const validationResult = {
-      zipStatus,
-      cityStatus
-    };
-
-    return validationResult.zipStatus && validationResult.cityStatus ? null : validationResult;
-  }
-
-  forbiddenName() {
-    return (formControl) => {
-      return formControl.value === 'Oliver' ? {forbiddenName: {invalid: true}} : null;
-    };
-  }
-
-  onSubmit(customeerdata) {
-    console.warn('Your order has been submitted', customeerdata);
-    this.items = this.cartService.clearCart();
-    this.checkoutForm.reset();
-  }
-
-  setDefault() {
-    this.checkoutForm.patchValue({
-      name: 'John Doe'
+          validators: this.crossValidation
+        })
     });
   }
 
   ngOnInit() {
   }
 
-  remove(id) {
-    this.items = this.cartService.remove(id);
+  removeFromCart(product) {
+    this.cartService.removeFromCart(product);
   }
 
   clearCart() {
-    this.items = this.cartService.clearCart();
+    this.cartService.clearCart();
+  }
+
+  onSubmit(value) {
+    console.log(value);
+
+    this.checkedForm.reset();
+  }
+
+  resetForm() {
+    this.checkedForm.patchValue({
+      name: 'Erekle'
+    });
+  }
+
+  crossValidation(formGroup) {
+    const zip = formGroup.get('zip').value;
+    const zipStatus = CartComponent.isZipOk(zip);
+
+    const city = formGroup.get('city').value;
+    const cityStatus = CartComponent.isCityOk(city);
+
+    return zipStatus && cityStatus ? null : {
+      zipStatus,
+      cityStatus
+    }
+  }
+
+  private static isZipOk(zip) {
+    return zip.length < 3;
+  }
+
+  private static isCityOk(city: string) {
+    return city.charAt(0).toLocaleLowerCase() !== 'a';
+  }
+
+  forbiddenName() {
+    return (formControl) => {
+      return formControl.value === 'Roman' ? { forbidden: { invalid: true } } : null;
+    }
   }
 
   get name() {
-    return this.checkoutForm.get('name') as FormControl;
+    return this.checkedForm.get('name') as FormControl;
   }
 
   get address() {
-    return this.checkoutForm.get('address') as FormGroup;
-  }
-
-  get zip() {
-    return this.checkoutForm.get('address').get('zip') as FormControl;
-  }
-
-  get city() {
-    return this.checkoutForm.get('address').get('city') as FormControl;
-  }
-  get state() {
-    return this.checkoutForm.get('address').get('state') as FormControl;
+    return this.checkedForm.get('address') as FormGroup;
   }
 
 }

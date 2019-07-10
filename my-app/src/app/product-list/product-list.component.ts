@@ -1,35 +1,35 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { products } from '../products';
-import { WishListService } from '../wishlist.service';
+import { WishListService } from '../wish-list.service';
 
-
-@Component ( {
-    selector: 'app-product-list',
-    templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.scss']
+@Component({
+    selector: `app-product-list`,
+    templateUrl: `./product-list.component.html`,
+    styleUrls: [`./product-list.component.scss`]
 })
+
 export class ProductListComponent {
     products = products;
 
-    constructor(
-        private wishlistService: WishListService
-    ) {}
+    constructor(private wishListService: WishListService) { }
+
     share() {
-        window.alert('The product has been shared');
+        window.alert(`The prodcut has been shared`);
     }
 
     onNotify() {
-        window.alert('You will be notified when the product goes on sale!');
-    }
-    addToWishlist(product, id) {
-        this.wishlistService.add(product, id);
+        window.alert(`You will bew notified`);
     }
 
-    check(id) {
-        return this.wishlistService.check(id);
+    addToWishList(product) {
+        this.wishListService.addToWishList(product);
     }
 
-    removeFromWishlist(id) {
-        return this.wishlistService.remove(id);
+    removeFromWishList(product) {
+        this.wishListService.removeFromWishList(product);
+    }
+
+    wishListHas(product) {
+        return this.wishListService.has(product);
     }
 }

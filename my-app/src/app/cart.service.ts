@@ -1,35 +1,33 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable ({
-    providedIn: 'root'
+@Injectable({
+  providedIn: 'root'
 })
+
 export class CartService {
-    items =[];
-    constructor(
-        private http: HttpClient
-    ) {}
-    addToCart(product) {
-        this.items.push(product);
-    }
+  items = [];
 
-    getitems() {
-        return this.items;
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    getShippingPrices() {
-        return this.http.get('/assets/shipping.json');
-    }
+  addToCart(product) {
+    this.items.push(product);
+  }
 
-    clearCart() {
-        this.items = [];
-        return this.items;
-    }
-    remove(id) {
-        this.items.splice(id, 1);
-        return this.items;
-    }
-    check(product) {
-        return this.items.includes(product);
-    }
+  getItems() {
+    return this.items;
+  }
+
+  removeFromCart(product) {
+    this.items.splice(this.items.indexOf(product), 1);
+  }
+
+  clearCart() {
+    this.items.splice(0);
+  }
+
+  getShippingCosts() {
+    return this.http.get('/assets/shipping.json');
+  }
 }

@@ -1,0 +1,16 @@
+<form [formGroup]="form">
+  <br>
+  <p></p>
+  <br>
+  <select formControlName="currency1" (change)="onChangeCurrency(form.value.currency1)">
+    <option value=""></option>
+    <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
+  </select>
+  <input type="text" formControlName="amount1" (keyup)="currencyInput(form.value.amount1)">
+  <select formControlName="currency2" (change)="onChangeBase(form.value.currency2)">
+    <option value=""></option>
+    <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
+  </select>
+  <input type="text" formControlName="amount2" (keyup)="onChangeCurrency2Input(form.value.amount2)">
+</form>
+

@@ -1,0 +1,21 @@
+<table *ngIf="users.length">
+  <tr>
+    <th>Email</th>
+    <th>Nick Name</th>
+    <th>Website</th>
+    <th>Phone Number</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let user of users; index as userId">
+    <td>{{user.email}}</td>
+    <td>{{user.nickName}}</td>
+    <td>{{user.website}}</td>
+    <td>{{user.phoneNumber}}</td>
+    <td>
+      <button [routerLink]="['/users/edit/', userId]">Edit</button>
+      <button (click)="startDialog()">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<app-confirmation-dialog *ngIf="dialog"></app-confirmation-dialog>

@@ -1,22 +1,18 @@
-<h2>Products</h2>
+<h2>Product list</h2>
 
-<div *ngFor=" let product of products; index as productId" style="margin-bottom: 10px">
+<div *ngFor="let product of products; index as productId">
     <h3>
-        <a [title]= "product.name + 'details'" [routerLink] = "['/products', productId]">
+        <a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
             {{product.name}}
         </a>
     </h3>
-    <p *ngIf = "product.description">
-        Description: {{product.description}}
-    </p>
-    <button (click)="share()">
-        Share
-    </button>
-    <app-product-alerts [product]="product" (notify)="onNotify()"></app-product-alerts>
-    <div style="margin-top: 10px">
-        <button *ngIf="!check(productId)" (click)="addToWishlist(product, productId)">Add To Wishlist</button>
-        <button *ngIf="check(productId)" (click)="removeFromWishlist(productId)">Remove From Wishlist</button>
-    </div>
-</div>
+    <p *ngIf="product.description">Description: {{product.description}}</p>
 
-<a routerLink = "/wishlist">View Wishlist</a>
+    <button (click)="share()">Share</button>
+    <app-product-alerts
+    [product]="product"
+    (notify)="onNotify()"
+    ></app-product-alerts>
+    <button (click)="addToWishList(product)" *ngIf="!wishListHas(product)">Add to Wish List</button>
+    <button (click)="removeFromWishList(product)" *ngIf="wishListHas(product)">Remove from Wish List</button>
+</div>

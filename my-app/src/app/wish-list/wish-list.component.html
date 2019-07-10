@@ -1,0 +1,11 @@
+<h3>Wish List</h3>
+
+<div *ngFor="let product of products; index as productId" class="cart-item">
+    <h3>
+        <a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
+            {{product.name}}
+        </a>
+    </h3>
+    <button (click)="removeFromWishList(product)">Remove from Wish List</button>
+</div>
+<button (click)="clearWishList()" *ngIf="products.length">Clear Wish List</button>

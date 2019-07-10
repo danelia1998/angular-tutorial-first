@@ -1,80 +1,67 @@
 <h3>Cart</h3>
 
 <p>
-    <a routerLink = '/shipping'>Shipping Prices</a>
+  <a routerLink="/shipping">Go to sheeping</a>
 </p>
 
-<div class="cart-item" *ngFor = "let item of items">
-    <span>{{item.name}}</span>
-    <span>{{item.price | currency}}</span>
-    <button (click)="remove(id)">Remove</button>
+<div class="cart-item" *ngFor="let item of items; index as productId">
+  <span>{{item.name}}</span>
+  <span>{{item.price | currency}}</span>
+  <button (click)="removeFromCart(item)">Remove</button>
 </div>
-<button style="margin-bottom: 15px" (click)="clearCart()">Clear</button>
+<button *ngIf="items && items.length > 0" (click)="clearCart()">Clear cart</button>
 
-<form [formGroup] = 'checkoutForm' (ngSubmit) = 'onSubmit(checkoutForm.value)'>
-    <div>
-        <label>Name</label>
-        <input type="text" formControlName = 'name' required>
-    </div>
-    <div formGroupName='address'>
-        <h3>Address</h3>
+<form [formGroup]="checkedForm" (ngSubmit)="onSubmit(checkedForm.value)">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" required>
+  </div>
+  <div formGroupName="address">
+    <h3>Address</h3>
+    <label>Street:
+      <input type="text" formControlName="street">
+    </label>
+    <label>City:
+      <input type="text" formControlName="city">
+    </label>
+    <label>State:
+      <input type="text" formControlName="state">
+    </label>
+    <label>Zip Code:
+      <input type="text" formControlName="zip">
+    </label>
+  </div>
 
-        <label>
-            Street:
-            <input type="text" formControlName='street'>
-        </label>
-        <label>
-            City:
-            <input type="text" formControlName='city'>
-        </label>
-        <label>
-            State:
-            <input type="text" formControlName='state'>
-        </label>
-        <label>
-            Zip Code:
-            <input type="text" formControlName='zip'>
-        </label>
-    </div>
-    <button class="button" type='submit'>Purchase</button>
-    <p>
-        <button class="button" type= "button" (click) = "setDefault()">Reset Name</button>
-    </p>
+  <button class="button" type="submit" [disabled]="checkedForm.status === 'INVALID'">Purchase</button>
+  <button class="button" type="button" (click)="resetForm()">Reset</button>
 </form>
-
 <div>
-    <h3>Customer</h3>
-    <p>Name: {{name.value}}</p>
-    <p>
-        Address: {{ address.value | json }}
-    </p>
-    <p>
-        Form Status: {{checkoutForm.status}}
-    </p>
+  <h3>Customer</h3>
+  <p>Name: {{checkedForm.controls.name.value}}</p>
+  <p>Address: {{checkedForm.controls.address.value | json}}</p>
+  <p>Form status: {{checkedForm.status}}</p>
+  <p>Form errors: {{checkedForm.controls.name.errors | json}}</p>
 </div>
 
 <div>
-    <h3>Errors:</h3>
-    <div *ngIf='address.invalid && (address.dirty || address.touched)'>
-        <div *ngIf='!address.errors?.zipStatus'>
-                Zip length should be less than 3
-        </div>
-        <div *ngIf='!address.errors?.cityStatus'>
-                City name should start from letter A
-        </div>
+  <h3>Errors</h3>
+  <div *ngIf="address.invalid &&(address.touched || address.dirty)">
+    <div *ngIf="!address.errors.zipStatus">
+      zip is too long
     </div>
-
-    <div *ngIf = 'name.invalid && (name.dirty || name.touched)'>
-        <div *ngIf='name.errors.required'>
-            Name is required
-        </div>
-
-        <div *ngIf='name.errors.minlength'>
-            Name must be at least 4 characters long
-        </div>
-
-        <div *ngIf='name.errors.forbiddenName?.invalid'>
-            Name can't be  like an {{name.value}}
-        </div>
+    <div *ngIf="!address.errors.cityStatus">
+      City cant start with a
     </div>
+  </div>
+  <div *ngIf="name.invalid && (name.dirty || name.touched)">
+    <div *ngIf="name.errors.required">
+      Name is required
+    </div>
+    <div *ngIf="name.errors.minlength">
+      Minimum length has to be 4
+    </div>
+    <div *ngIf="name.errors.forbidden">
+      Name can't be {{name.value}}
+    </div>
+  </div>
 </div>
