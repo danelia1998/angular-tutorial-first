@@ -19,7 +19,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
-import { ShippingService } from './shipping.service';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +56,7 @@ import { ShippingService } from './shipping.service';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [ShippingService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
