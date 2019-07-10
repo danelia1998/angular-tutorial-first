@@ -19,6 +19,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
+import { ShippingService } from './shipping.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [ShippingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

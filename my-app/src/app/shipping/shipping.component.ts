@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart.service';
-
+import { ShippingService } from '../shipping.service';
 @Component({
-  selector: 'app-shipping',
-  templateUrl: './shipping.component.html',
-  styleUrls: ['./shipping.component.scss']
+ selector: 'app-shipping',
+ templateUrl: './shipping.component.html',
+ styleUrls: ['./shipping.component.scss']
 })
 export class ShippingComponent implements OnInit {
 
-  shippingCosts;
+ shippingCosts;
 
-  constructor(private cartService: CartService) {
-    this.shippingCosts = cartService.getShippingCosts();
-   }
-
-  ngOnInit() {
+ constructor(
+   private shippingService: ShippingService
+ ) {
+   this.shippingCosts = this.shippingService.getShippingPrices();
   }
+
+ ngOnInit() {
+ }
 
 }
