@@ -23,6 +23,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { AdminComponent } from './admin/admin.component';
+import { GuardComponent } from './guard/guard.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -45,25 +48,30 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     NewsComponent,
     ArticleComponent,
     ErrorPageComponent,
+    AdminComponent,
+    GuardComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-      { path: 'products/:productId', component: ProductDetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'shipping', component: ShippingComponent },
-      { path: 'register', component: UserRegisterComponent },
-      { path: 'users', component: UsersListComponent },
-      { path: 'users/edit/:userId', component: UserEditComponent },
-      { path: 'currency', component: CurrencyComponent },
-      { path: 'currency-converter', component: CurrencyConverterComponent },
-      { path : 'dashboard', component: DashboardComponent},
-      { path : 'dashboard/news', component: NewsComponent},
-      { path : 'dashboard/news/:articleId', component: ArticleComponent},
-      { path : 'error', component: ErrorPageComponent},
+      { path: '', data: { name: 'Home' }, component: ProductListComponent },
+      { path: 'products/:productId', data: { name: 'Product' }, component: ProductDetailsComponent },
+      { path: 'cart', data: { name: 'Cart' }, component: CartComponent },
+      { path: 'shipping', data: { name: 'Shipping' }, component: ShippingComponent },
+      { path: 'register', data: { name: 'Register' }, component: UserRegisterComponent },
+      { path: 'users', data: { name: 'Users' }, component: UsersListComponent },
+      { path: 'users/edit/:userId', data: { name: 'UsersEach' }, component: UserEditComponent },
+      { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
+      { path: 'currency-converter', data: { name: 'Converter' }, component: CurrencyConverterComponent },
+      { path : 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent},
+      { path : 'dashboard/news', data: { name: 'News' }, component: NewsComponent},
+      { path : 'dashboard/news/:articleId', data: { name: 'Article' }, component: ArticleComponent},
+      { path : 'error', data: { name: 'Error' }, component: ErrorPageComponent},
+      { path : 'admin', data: { name: 'Admin' }, canActivate: [AuthGuard], component: AdminComponent},
+      { path : 'guard', data: { name: 'Guard' }, component: GuardComponent},
+
 
     ]),
     ReactiveFormsModule,

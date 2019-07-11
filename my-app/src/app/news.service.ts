@@ -6,7 +6,7 @@ import { dataBase } from './newsDB';
 })
 export class NewsService {
   articles = dataBase;
-
+  
 
   constructor() { }
 

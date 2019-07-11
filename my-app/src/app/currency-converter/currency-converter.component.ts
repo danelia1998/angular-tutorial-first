@@ -25,11 +25,10 @@ export class CurrencyConverterComponent implements OnInit {
       amount2: ''
     });
   }
-  
 
   getRate(base, cur) {
     this.currencyConverterService.getRates(base, cur).subscribe(value => {
-      this.rate = value.rates[cur];
+      this.rate = value['rates'][cur];
     });
   }
 
