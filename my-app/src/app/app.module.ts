@@ -25,6 +25,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuardComponent } from './guard/guard.component';
 import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AuthGuard } from './auth.guard';
     ErrorComponent,
     BreadcrumbsComponent,
     AdminComponent,
-    GuardComponent
+    GuardComponent,
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
@@ -69,6 +71,7 @@ import { AuthGuard } from './auth.guard';
       { path: 'dashboard/news/:articleId', data: {name: 'Article'}, component: ArticleComponent},
       { path: 'error', data: {name: 'Error'}, component: ErrorComponent},
       { path: 'guard', data: {name: 'Guard'}, component: GuardComponent},
+      { path: 'login', data: {name: 'Login'}, component: LoginComponent},
       { path: 'admin', data: {name: 'Admin'}, component: AdminComponent, canActivate: [AuthGuard]},
       { path: '**', redirectTo: 'error'}
     ])

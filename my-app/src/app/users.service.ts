@@ -17,4 +17,8 @@ export class UsersService {
     delete(user) {
         this.users.splice(this.users.indexOf(user), 1);
     }
+
+    getUsers() {
+        return this.users;
+    }
 }

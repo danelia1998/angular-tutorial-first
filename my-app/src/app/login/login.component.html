@@ -1,0 +1,14 @@
+<p>login works!</p>
+
+<form [formGroup]="loginform">
+    <div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" formControlName="email">
+    </div>
+    <div>    
+        <label for="pw">Password:</label>
+        <input type="password" formControlName="password" id="pw">
+    </div>
+    <input type="submit" (click)="logIn()" class="button" value="Register" >
+</form>
+
