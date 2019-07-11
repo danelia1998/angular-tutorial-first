@@ -19,6 +19,10 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewsComponent } from './news/news.component';
+import { ArticleComponent } from './article/article.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
     ConfirmationDialogComponent,
     CurrencyComponent,
     CurrencyConverterComponent,
+    DashboardComponent,
+    NewsComponent,
+    ArticleComponent,
+    ErrorPageComponent,
   ],
   imports: [
     HttpClientModule,
@@ -51,7 +59,12 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
       { path: 'users', component: UsersListComponent },
       { path: 'users/edit/:userId', component: UserEditComponent },
       { path: 'currency', component: CurrencyComponent },
-      { path: 'currency-converter', component: CurrencyConverterComponent }
+      { path: 'currency-converter', component: CurrencyConverterComponent },
+      { path : 'dashboard', component: DashboardComponent},
+      { path : 'dashboard/news', component: NewsComponent},
+      { path : 'dashboard/news/:articleId', component: ArticleComponent},
+      { path : 'error', component: ErrorPageComponent},
+
     ]),
     ReactiveFormsModule,
     FormsModule,
