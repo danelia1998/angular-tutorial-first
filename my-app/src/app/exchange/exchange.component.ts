@@ -47,19 +47,6 @@ export class ExchangeComponent implements OnInit {
     return this.exchangeService.setToValue(value);
   }
 
-  changeFromCurrency(value) {
-    const rate$ = this.setFromValue(value);
-    if (rate$) {
-      rate$.subscribe(() => {
-        this.changeFromValue(this.input.value);
-      });
-    }
-  }
-
-  changeFromValue(value) {
-    this.output.setValue(value * this.exchangeService.rate);
-  }
-
   changeToCurrency(value) {
     const rate$ = this.setToValue(value);
     if (rate$) {
@@ -71,6 +58,19 @@ export class ExchangeComponent implements OnInit {
 
   changeToValue(value) {
     this.input.setValue(value / this.exchangeService.rate);
+  }
+
+  changeFromCurrency(value) {
+    const rate$ = this.setFromValue(value);
+    if (rate$) {
+      rate$.subscribe(() => {
+        this.changeFromValue(this.input.value);
+      });
+    }
+  }
+
+  changeFromValue(value) {
+    this.output.setValue(value * this.exchangeService.rate);
   }
 
   get input() {
