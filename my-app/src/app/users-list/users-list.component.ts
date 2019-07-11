@@ -8,17 +8,21 @@ import { UsersService } from '../users.service';
 })
 export class UsersListComponent implements OnInit {
   users;
-  dialog = false;
+  clicked = false;
 
-  constructor(private usersService: UsersService) {
-    this.users = this.usersService.getUsers();
+  constructor( private usersService: UsersService) {
+    this.users = usersService.users;
   }
 
   ngOnInit() {
   }
 
-  startDialog() {
-    this.dialog = true;
+  click() {
+    this.clicked = !this.clicked;
+  }
+
+  delete(user) {
+    this.usersService.delete(user);
   }
 
 }

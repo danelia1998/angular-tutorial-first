@@ -1,7 +1,8 @@
 <p>Wishlist</p>
 
-<div *ngFor="let item of items;index as id" class="shipping-item">
+<div class="cart-item" *ngFor="let item of items">
     {{item.name}}
-    <button (click)="remove(id)">Remove</button>
+    {{item.price | currency}}
+    <button (click)="removeItem(item)">Remove</button>
 </div>
-<button (click)="clearWishlist()">Clear</button>
+<button *ngIf="items.length" (click)="removeAll()">Remove All</button>

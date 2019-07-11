@@ -1,0 +1,21 @@
+<h1>Currency Converter</h1>
+
+<form [formGroup]="exchangeForm">
+    <div class="container">
+        <div>
+            <select formControlName="currencyFrom"  (change)="changeFromCurrency($event.target.value)">
+                <option *ngFor="let currency of currencies">{{currency}}</option>
+            </select>
+        </div>
+        <input type="number" formControlName="input" (input)="changeFromValue($event.target.value)">
+    </div>
+    <div class="container">
+        <div >
+            <select formControlName="currencyTo"  (change)="changeToCurrency($event.target.value)">
+                <option *ngFor="let currency of currencies">{{currency}}</option>
+            </select>
+        </div>
+        <input type="number" formControlName="output" (input)="changeToValue($event.target.value)">
+    </div>
+</form>
+<div *ngIf="exchangeForm.status !== 'VALID'"><h3>Please provide positive numbers!</h3></div>

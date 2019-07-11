@@ -1,29 +1,20 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
+
 export class UsersService {
-  users;
+    constructor() { }
 
-  public getUsers() {
-    return this.users;
-  }
+    users = [];
 
-  public store(user) {
-    this.users.push(user);
-    window.alert('User was saved');
-  }
+    register(user) {
+        this.users.push(user);
+        window.alert('Registration Successful!');
+    }
 
-  public update(user, data) {
-    const oldUser = this.users[this.users.indexOf(user)];
-
-    oldUser.email = data.email;
-    oldUser.nickName = data.nickName;
-    oldUser.website = data.website;
-    oldUser.phoneNumber = data.phoneNumber;
-    oldUser.password = data.passwordGroup.password ? data.passwordGroup.password : oldUser.password;
-
-    window.alert('User was updated');
-  }
+    delete(user) {
+        this.users.splice(this.users.indexOf(user), 1);
+    }
 }

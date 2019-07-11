@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { data } from './currencies';
-import { Observable, from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrencyService {
+
   currencies;
   Observer;
 
@@ -14,23 +15,40 @@ export class CurrencyService {
     this.currencies = data;
 
     this.Observer = new Observable(this.subscribe());
-  }
+   }
 
-  subscribe() {
-    return (subscriber) => {
+   transformObjectToArray(object) {
+     const result = [];
+     const keys = Object.keys(object);
+
+     for (const key of keys) {
+      const value = object[key];
+      const item = {
+        currency: key,
+        value
+      };
+
+      result.push(item);
+     }
+     return result;
+   }
+
+   subscribe() {
+     return (subscriber) => {
       let i = 0;
-      from(this.currencies).subscribe(currency => {
+      from(this.currencies).subscribe( currency => {
         const url = `https://api.exchangeratesapi.io/latest?symbols=${currency}`;
         this.httpClient
           .get(url)
-          .subscribe(value => {
+          .subscribe( value => {
             subscriber.next(value);
             i++;
+
             if (i === this.currencies.length) {
               subscriber.complete();
             }
-          });
+        });
       });
-    }
+    };
   }
 }

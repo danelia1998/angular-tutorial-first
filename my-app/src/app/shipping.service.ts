@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingService {
-private type = 'None';
 
- constructor(
-   private http: HttpClient
- ) { }
+  private type = 'none';
 
- getShippingPrices() {
-   return this.http.get('/assets/shipping.json');
- }
+  constructor(private http: HttpClient) { }
 
- getType(){
-   return this.type;
- }
+  getShippingCosts() {
+    return this.http.get('/assets/shipping.json');
+  }
 
- selectType(type) {
-   this.type = type;
- }
+  setShipping(value) {
+    this.type = value;
+  }
+
+  getType() {
+    return this.type;
+  }
 }

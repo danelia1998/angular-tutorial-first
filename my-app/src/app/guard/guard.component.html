@@ -1,13 +1,15 @@
 <h1>Guard Page</h1>
 
 <p>
-    <button (click)="allow()">Allow Access</button>
+    <button (click)="allow()">Allow</button>
 </p>
 
 <p>
-    <button (click)="block()">Block Access</button>
+    <button (click)="disabled()">Disabled</button>
 </p>
 
-<h3>Current Access: {{ access }}</h3>
+<h3>
+    Current access: {{access ? 'Allowed' : 'Disabled'}}
+</h3>
 
-<a routerLink = "/admin">Admin page</a>
+<a routerLink="/admin">Admin page</a>

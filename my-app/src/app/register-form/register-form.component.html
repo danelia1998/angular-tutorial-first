@@ -1,0 +1,80 @@
+<form [formGroup]="registerForm">
+    <div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" formControlName="email">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors.required">
+                E-mail field is required!
+            </div>
+            <div *ngIf="email.errors.email">
+                E-mail is invalid!
+            </div>
+        </div>
+    </div>
+    <div>    
+        <label for="pw">Password:</label>
+        <input type="password" formControlName="password" id="pw">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div *ngIf="password.errors.required">
+                Password field is required!
+            </div>
+            <div *ngIf="password.errors.pattern">
+                Password must contain numbers and English letters only!
+            </div>
+            <div *ngIf="password.errors.minlength">
+                Password must have at least 8 characters!
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" formControlName="confirm" id="confirm">
+        <div *ngIf="confirm.invalid && (confirm.dirty || confirm.touched)">
+            <div *ngIf="registerForm.errors.passwordsDontMatch">
+                Passwords dont match!
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="nickname">Nickname:</label>
+        <input type="text" formControlName="nickname" id="nickname">
+        <div *ngIf="nickname.invalid && (nickname.dirty || nickname.touched)">
+            <div *ngIf="nickname.errors.required">
+                Nickname field is required!
+            </div>
+            <div *ngIf="nickname.errors.pattern">
+                Nickname should contain only english characters numbers and character '-'!
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="phone">Phone:</label>
+        <input type="text" formControlName="phone" id="phone">
+        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <div *ngIf="phone.errors.required">
+                Phone number is required!
+            </div>
+            <div *ngIf="phone.errors.pattern">
+                Phone Number should always start from '+380' then it should contain 9 numbers!
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="website">Website:</label>
+        <input type="text" formControlName="website" id="website" placeholder="website">
+        <div *ngIf="website.invalid && (website.dirty || website.touched)">
+            <div *ngIf="website.errors.required">
+                Website field is required!
+            </div>
+            <div *ngIf="website.errors.pattern">
+                Website is Invalid!
+            </div>
+        </div>
+    </div>
+    <label>
+        <input type="checkbox" formControlName="checkbox">
+        I have read the <a href="#">agreement</a>
+    </label>
+    <input type="submit" (click)="register()" class="button" value="Register" [disabled]="registerForm.status === 'INVALID'">
+</form>
+

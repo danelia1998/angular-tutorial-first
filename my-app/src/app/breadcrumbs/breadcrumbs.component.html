@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let item of breadcrumbsList; let i = index">
+        <span *ngIf="i === breadcrumbsList.length - 1">{{item.data.name}}</span>
+        <a *ngIf="i !== breadcrumbsList.length - 1" routerLink="{{item.path}}">{{item.data.name}}</a>
+    </li>
+</ul>

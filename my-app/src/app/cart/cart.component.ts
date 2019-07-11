@@ -1,90 +1,88 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup } from "@angular/forms";
-import { CartService } from '../cart.service';
+
+import { CartService } from './../cart.service';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+    selector: 'app-cart',
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.scss']
 })
+
 export class CartComponent implements OnInit {
-  items;
-  checkedForm;
+    items;
+    checkedForm;
 
-  constructor(
-    private cartService: CartService,
-    private formBuilder: FormBuilder
-  ) {
-    this.items = this.cartService.getItems();
-    this.checkedForm = formBuilder.group({
-      name: ['', [Validators.minLength(4), this.forbiddenName()]],
-      address: formBuilder.group({
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
-      }, {
-          validators: this.crossValidation
-        })
-    });
-  }
+    constructor(
+        private cartService: CartService,
+        private formBuilder: FormBuilder
+    ) {
+        this.items = this.cartService.getItems();
 
-  ngOnInit() {
-  }
-
-  removeFromCart(product) {
-    this.cartService.removeFromCart(product);
-  }
-
-  clearCart() {
-    this.cartService.clearCart();
-  }
-
-  onSubmit(value) {
-    console.log(value);
-
-    this.checkedForm.reset();
-  }
-
-  resetForm() {
-    this.checkedForm.patchValue({
-      name: 'Erekle'
-    });
-  }
-
-  crossValidation(formGroup) {
-    const zip = formGroup.get('zip').value;
-    const zipStatus = CartComponent.isZipOk(zip);
-
-    const city = formGroup.get('city').value;
-    const cityStatus = CartComponent.isCityOk(city);
-
-    return zipStatus && cityStatus ? null : {
-      zipStatus,
-      cityStatus
+        this.checkedForm = formBuilder.group({
+            name: ['', [Validators.minLength(4), this.forbiddenName()]],
+            address: formBuilder.group({
+                street: '',
+                city: '',
+                state: '',
+                zip: ''
+            }, {
+                validators: this.crossValidation
+            })
+        });
     }
-  }
 
-  private static isZipOk(zip) {
-    return zip.length < 3;
-  }
-
-  private static isCityOk(city: string) {
-    return city.charAt(0).toLocaleLowerCase() !== 'a';
-  }
-
-  forbiddenName() {
-    return (formControl) => {
-      return formControl.value === 'Roman' ? { forbidden: { invalid: true } } : null;
+    private static isZipOk(zip) {
+        return zip.length < 3;
     }
-  }
 
-  get name() {
-    return this.checkedForm.get('name') as FormControl;
-  }
+    private static isCityOk(city) {
+        return city.charAt(0).toLowerCase() !== 'a';
+    }
 
-  get address() {
-    return this.checkedForm.get('address') as FormGroup;
-  }
+    ngOnInit() {
 
+    }
+
+    crossValidation(formGroup) {
+        const zip = formGroup.get('zip').value;
+        const zipStatus = CartComponent.isZipOk(zip);
+        const city = formGroup.get('city').value;
+        const cityStatus = CartComponent.isCityOk(city);
+
+        return  zipStatus && cityStatus ? null : {
+            zipStatus,
+            cityStatus
+        };
+    }
+
+    forbiddenName() {
+        return (formControl) => {
+            return formControl.value === 'Roman' ? {forbidden: {invalid: true}} : null;
+        };
+    }
+    removeItem(product) {
+        this.cartService.removeItem(product);
+    }
+    removeAll() {
+        this.items = this.cartService.clearCart();
+    }
+    onSubmit(value) {
+        console.log(value);
+
+        this.checkedForm.reset();
+    }
+    resetForm() {
+        this.checkedForm.patchValue({
+            name: 'Luka'
+        });
+    }
+
+    get name() {
+        return this.checkedForm.get('name') as FormControl;
+    }
+
+    get address() {
+        return this.checkedForm.get('address') as FormGroup;
+    }
 }

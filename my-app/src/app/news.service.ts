@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
-import { dataBase } from './newsDB';
+import { dataBase } from './dbArticle';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
-  articles = dataBase;
-  
 
   constructor() { }
 
   getArticles() {
-    return this.articles;
+    return dataBase;
   }
 
-  getArticle(id) {
-    return this.articles.find((article) => {
-      return article.id === id;
-    });
+  getArticleById(articleId) {
+    return dataBase.find((article) => article.id === articleId);
   }
 }

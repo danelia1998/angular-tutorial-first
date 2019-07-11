@@ -4,19 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  isAccessAllowed = false;
+
+  private access = false;
 
   constructor() { }
 
-  isUserAuthenticated() {
-    return this.isAccessAllowed;
+  disabled() {
+    this.access = false;
   }
 
-  allowAccess() {
-    this.isAccessAllowed = true;
+  allow() {
+    this.access = true;
   }
 
-  blockAccess() {
-    this.isAccessAllowed = false;
+  isEnabled() {
+    return this.access;
   }
 }

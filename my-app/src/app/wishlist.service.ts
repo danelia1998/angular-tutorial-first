@@ -3,31 +3,30 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-
 export class WishListService {
-    wishList = [];
-    constructor() {}
+    constructor() {
 
-    getAll() {
-        return this.wishList;
     }
 
-    add(product, id) {
-        console.log(id);
-        if (!this.check(id)) {
-            this.wishList.push({...product, id});
+    items = [];
+
+    doesInclude(product) {
+        return this.items.includes(product);
+    }
+    addToList(product) {
+        if (!this.doesInclude(product)) {
+            window.alert('Item added to wishlist!');
+            this.items.push(product);
         }
     }
-    remove(id) {
-        this.wishList.splice(this.wishList.findIndex((item) => item.id === id), 1);
+    getItems() {
+        return this.items;
     }
-
-    check(id) {
-        return this.wishList.some((item) => item.id === id);
+    clearList() {
+        this.items = [];
+        return this.items;
     }
-
-    clearWishlist() {
-        this.wishList = [];
-        return this.wishList;
+    removeItem(product) {
+        this.items.splice(this.items.indexOf(product), 1);
     }
 }

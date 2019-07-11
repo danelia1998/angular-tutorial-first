@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewsService } from '../news.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-article',
@@ -8,24 +8,20 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+
   article;
 
-  constructor(
-    private router: Router,
-    private routeState: ActivatedRoute,
-    private newsService: NewsService
-  ) { }
+  constructor(private activatedRoute: ActivatedRoute, private newsService: NewsService, private router: Router) {
+    this.activatedRoute.paramMap.subscribe(value => {
+      const articleId = +value.get('articleId');
+      this.article = this.newsService.getArticleById(articleId);
+      if (!this.article) {
+        router.navigate(['errro']);
+      }
+    });
+   }
 
   ngOnInit() {
-    this.routeState.paramMap.subscribe((params) => {
-      const articleId = +params.get('articleId');
-      const article = this.newsService.getArticle(articleId);
-      if(!article) {
-        this.router.navigate(['errors']);
-      }
-
-      this.article = article;
-    });
   }
 
 }

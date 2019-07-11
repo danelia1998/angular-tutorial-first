@@ -7,14 +7,14 @@ import { NewsService } from '../news.service';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
-  articles = [];
 
-  constructor(
-    private newsService: NewsService
-  ) { }
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-    this.articles = this.newsService.getArticles();
+  }
+
+  get articles() {
+    return this.newsService.getArticles();
   }
 
 }

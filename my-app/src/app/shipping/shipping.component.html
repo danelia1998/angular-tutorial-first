@@ -1,13 +1,15 @@
 <p>Shipping costs</p>
 
-<div *ngFor="let shipping of shippingCosts | async" class="shipping-item">
+<div class="shipping-item" *ngFor="let shipping of shippingCosts | async">
     <span>{{shipping.name}}</span>
     <span>{{shipping.price | currency}}</span>
 </div>
 
-<select [(ngModel)]="selectedShipping" (change) = "selectShipping($event.target.value)">
-    <option [value] = "'None'">None</option>
-    <option [value] ="shipping.name" *ngFor = "let shipping of shippingCosts | async" >{{shipping.name}}</option>
+<select [(ngModel)]="selectedShipping" (change)="selectShipping($event.target.value)">
+    <option [value]="'None'">None</option>
+    <option [value]="shipping.name" *ngFor="let shipping of shippingCosts | async">{{shipping.name}}</option>
 </select>
 
-<h3>Current Shipping: <span *ngIf="selectedShipping">{{ selectedShipping }}</span></h3>
+<h3>
+    Selected shipping: {{selectedShipping}}
+</h3>

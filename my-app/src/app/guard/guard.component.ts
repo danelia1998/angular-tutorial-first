@@ -13,13 +13,16 @@ export class GuardComponent implements OnInit {
   ngOnInit() {
   }
 
-  get access() {
-    return this.authService.isUserAuthenticated() ? 'Allowed' :  'Blocked'};
-
   allow() {
-    return this.authService.allowAccess();
+    this.authService.allow();
   }
-  block() {
-    return this.authService.blockAccess();
+
+  disabled() {
+    this.authService.disabled();
   }
+
+  get access() {
+    return this.authService.isEnabled();
+  }
+
 }

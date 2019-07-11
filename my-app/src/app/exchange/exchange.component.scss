@@ -1,0 +1,29 @@
+form {
+    width: 850px;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+
+    .container {
+
+        select {
+            margin-right: 5px;
+            font-size: 30.5px;
+        }
+
+        input {
+            font-size: 20px;
+            color: black;
+        }
+    }
+}
+
+h3 {
+    font-size: 40px;
+    color: red;
+}
+
+.app-exchange {
+    padding: 0 16px;
+    margin: auto;
+}

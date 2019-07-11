@@ -11,22 +11,20 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { HttpClientModule } from '@angular/common/http';
-import { WishListComponent } from './wish-list/wish-list.component';
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { UserRegisterComponent } from './user-register/user-register.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RegisterFormComponent } from './register-form/register-form.component';
 import { UsersListComponent } from './users-list/users-list.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CurrencyComponent } from './currency/currency.component';
-import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
+import { ExchangeComponent } from './exchange/exchange.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorComponent } from './error/error.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuardComponent } from './guard/guard.component';
-import { AuthGuard } from './auth.guard';
-
+import { AdminGuard } from './admin.guard';
 
 @NgModule({
   declarations: [
@@ -37,45 +35,43 @@ import { AuthGuard } from './auth.guard';
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    WishListComponent,
-    UserRegisterComponent,
+    WishlistComponent,
+    RegisterFormComponent,
     UsersListComponent,
-    UserEditComponent,
-    ConfirmationDialogComponent,
     CurrencyComponent,
-    CurrencyConverterComponent,
+    ExchangeComponent,
     DashboardComponent,
     NewsComponent,
     ArticleComponent,
-    ErrorPageComponent,
+    ErrorComponent,
+    BreadcrumbsComponent,
     AdminComponent,
-    GuardComponent,
+    GuardComponent
   ],
   imports: [
     HttpClientModule,
+    ReactiveFormsModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: '', data: { name: 'Home' }, component: ProductListComponent },
-      { path: 'products/:productId', data: { name: 'Product' }, component: ProductDetailsComponent },
-      { path: 'cart', data: { name: 'Cart' }, component: CartComponent },
-      { path: 'shipping', data: { name: 'Shipping' }, component: ShippingComponent },
-      { path: 'register', data: { name: 'Register' }, component: UserRegisterComponent },
-      { path: 'users', data: { name: 'Users' }, component: UsersListComponent },
-      { path: 'users/edit/:userId', data: { name: 'UsersEach' }, component: UserEditComponent },
-      { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
-      { path: 'currency-converter', data: { name: 'Converter' }, component: CurrencyConverterComponent },
-      { path : 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent},
-      { path : 'dashboard/news', data: { name: 'News' }, component: NewsComponent},
-      { path : 'dashboard/news/:articleId', data: { name: 'Article' }, component: ArticleComponent},
-      { path : 'error', data: { name: 'Error' }, component: ErrorPageComponent},
-      { path : 'admin', data: { name: 'Admin' }, canActivate: [AuthGuard], component: AdminComponent},
-      { path : 'guard', data: { name: 'Guard' }, component: GuardComponent},
-
-
-    ]),
-    ReactiveFormsModule,
-    FormsModule,
+      { path: '', data: {name: 'Home'}, component: ProductListComponent},
+      { path: 'products/:productId', data: {name: 'Product'}, component: ProductDetailsComponent},
+      { path: 'cart', data: {name: 'Cart'}, component: CartComponent},
+      { path: 'shipping', data: {name: 'Shipping'}, component: ShippingComponent},
+      { path: 'wishlist', data: {name: 'Wishlist'}, component: WishlistComponent},
+      { path: 'register-form', data: {name: 'Register'}, component: RegisterFormComponent },
+      { path: 'users-list', data: {name: 'Users'}, component: UsersListComponent },
+      { path: 'currency', data: {name: 'Currency'}, component: CurrencyComponent},
+      { path: 'exchange', data: {name: 'Exchange'}, component: ExchangeComponent},
+      { path: 'dashboard', data: {name: 'Dashboard'}, component: DashboardComponent},
+      { path: 'dashboard/news', data: {name: 'News'}, component: NewsComponent},
+      { path: 'dashboard/news/:articleId', data: {name: 'Article'}, component: ArticleComponent},
+      { path: 'error', data: {name: 'Error'}, component: ErrorComponent},
+      { path: 'guard', data: {name: 'Guard'}, component: GuardComponent},
+      { path: 'admin', data: {name: 'Admin'}, component: AdminComponent, canActivate: [AdminGuard]},
+      { path: '**', redirectTo: 'error'}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

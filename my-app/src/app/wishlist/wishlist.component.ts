@@ -7,24 +7,22 @@ import { WishListService } from '../wishlist.service';
   styleUrls: ['./wishlist.component.scss']
 })
 export class WishlistComponent implements OnInit {
-  items;
-  constructor(
-    private wishListService: WishListService
-  ) {
-    this.items = wishListService.getAll();
-  }
+    items;
 
-  ngOnInit() {
-  }
-  add(product, id) {
-    this.wishListService.add(product, id);
-  }
+    constructor(
+        private wishListService: WishListService
+    ) {
+        this.items = this.wishListService.getItems();
+    }
 
-  remove(id) {
-    this.wishListService.remove(id);
-  }
-  clearWishlist() {
-    this.items = this.wishListService.clearWishlist();
-  }
+    ngOnInit() {
+
+    }
+    removeItem(product) {
+        this.wishListService.removeItem(product);
+    }
+    removeAll() {
+        this.items = this.wishListService.clearList();
+    }
 
 }
