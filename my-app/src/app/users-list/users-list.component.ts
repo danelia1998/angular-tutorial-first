@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-users-list',
@@ -10,7 +11,9 @@ export class UsersListComponent implements OnInit {
   users;
   clicked = false;
 
-  constructor( private usersService: UsersService) {
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService) {
     this.users = usersService.users;
   }
 
@@ -23,6 +26,10 @@ export class UsersListComponent implements OnInit {
 
   delete(user) {
     this.usersService.delete(user);
+  }
+
+  logOut() {
+    this.authService.disabled();
   }
 
 }

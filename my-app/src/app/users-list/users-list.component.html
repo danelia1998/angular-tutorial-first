@@ -1,4 +1,7 @@
 <h1>Users</h1>
+
+<input type="submit" (click)="logOut()" onclick="window.location.href = '/login'" class="button" value="Log Out" style="color: red; backgroung-color:grey;">
+
 <div class="container">
     <div *ngFor="let user of users" class="user">
         <h4>User: {{user.nickname}}</h4>
