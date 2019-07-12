@@ -9,6 +9,7 @@ import { EmployeesService } from '../employees.service';
 })
 export class EmployeeComponent implements OnInit {
   currentEmployee;
+  deleteClicked = false;
 
   constructor(
     private router: Router,
@@ -24,4 +25,15 @@ export class EmployeeComponent implements OnInit {
       });
     });
   }
+  deleteAction() {
+    return this.deleteClicked = !this.deleteClicked;
+  }
+
+  delete() {
+    this.employeesService.delete(this.currentEmployee).subscribe();
+    this.router.navigate(['employees']);
+  }
+
+
+
 }

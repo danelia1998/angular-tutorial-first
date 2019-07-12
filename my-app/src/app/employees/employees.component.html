@@ -9,11 +9,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let employee of employees$ | async">
+  <tr *ngFor="let employee of employees$ | async | paginate: { itemsPerPage: 5, currentPage: p };" >
       <td><a [routerLink]="[ '/employee', employee.id ]">{{employee.id}} </a> </td>
       <td> {{employee.name}}</td>
       <td>{{employee.salary}}</td>
       <td>{{employee.age}}</td>
   </tr>
   </tbody>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </table>

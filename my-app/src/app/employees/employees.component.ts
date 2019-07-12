@@ -8,6 +8,7 @@ import {EmployeesService} from '../employees.service';
 })
 export class EmployeesComponent implements OnInit {
   employees$;
+  p = 1;
   constructor(
     private employeesService: EmployeesService,
   ) { }
@@ -15,5 +16,4 @@ export class EmployeesComponent implements OnInit {
   ngOnInit() {
     this.employees$ = this.employeesService.getEmployees();
   }
-
 }

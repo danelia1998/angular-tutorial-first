@@ -51,4 +51,8 @@ export class EmployeesService {
       };
     }));
   }
+  delete(employee) {
+    const url = `${this.host}/delete/${employee.id}`;
+    return this.httpClient.delete(url, employee);
+  }
 }

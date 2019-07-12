@@ -7,6 +7,10 @@
     <p>Age: {{currentEmployee.age}}</p>
 </div>
 
+<div class="wrap">
+    <button class="button" (click)="deleteAction()" (click)="delete()">Delete</button>
+</div>
+
 <div *ngIf="!currentEmployee?.name&&!currentEmployee?.salary&&!currentEmployee?.age">
     <h1>cannot find user</h1>
 </div>

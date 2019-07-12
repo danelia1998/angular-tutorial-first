@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -61,6 +61,7 @@ import { EmployeeComponent } from './employee/employee.component';
     ReactiveFormsModule,
     BrowserModule,
     FormsModule,
+    NgxPaginationModule,
     AppRoutingModule,
     RouterModule.forRoot([
       { path: '', data: {name: 'Home'}, component: ProductListComponent},
@@ -87,5 +88,6 @@ import { EmployeeComponent } from './employee/employee.component';
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }
