@@ -1,0 +1,19 @@
+<h1>Employees</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Salary</th>
+    <th>Age</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of employees$ | async">
+      <td><a [routerLink]="[ '/employee', employee.id ]">{{employee.id}} </a> </td>
+      <td> {{employee.name}}</td>
+      <td>{{employee.salary}}</td>
+      <td>{{employee.age}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -26,6 +26,9 @@ import { AdminComponent } from './admin/admin.component';
 import { GuardComponent } from './guard/guard.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { LoginComponent } from './login/login.component';
     BreadcrumbsComponent,
     AdminComponent,
     GuardComponent,
-    LoginComponent
+    LoginComponent,
+    EmployeesComponent,
+    EmployeeRegisterComponent,
+    EmployeeComponent
   ],
   imports: [
     HttpClientModule,
@@ -72,8 +78,12 @@ import { LoginComponent } from './login/login.component';
       { path: 'error', data: {name: 'Error'}, component: ErrorComponent},
       { path: 'guard', data: {name: 'Guard'}, component: GuardComponent},
       { path: 'login', data: {name: 'Login'}, component: LoginComponent},
+      { path: 'employees', data: {name: 'Employees'}, component: EmployeesComponent},
+      { path: 'employee/register', data: {name: 'employeeRegister'}, component: EmployeeRegisterComponent},
       { path: 'admin', data: {name: 'Admin'}, component: AdminComponent, canActivate: [AuthGuard]},
+      {path: 'employee/:employeeId', data: { name: 'employee' }, component: EmployeeComponent},
       { path: '**', redirectTo: 'error'}
+
     ])
   ],
   providers: [],
