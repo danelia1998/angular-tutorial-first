@@ -11,12 +11,14 @@ interface IEmployee {
 @Injectable({
   providedIn: 'root'
 })
+
 export class EmployeesService {
   host = 'http://dummy.restapiexample.com/api/v1';
 
   constructor(
     private httpClient: HttpClient
   ) { }
+  
   getEmployees() {
     const url = `${this.host}/employees`;
     return this.httpClient.get(url)
@@ -40,16 +42,13 @@ export class EmployeesService {
   }
   getEmployeeByID(userId) {
     return this.httpClient.get(`${this.host}/employee/${userId}`).pipe(map((employee: IEmployee) => {
-
       const { id, employee_name, employee_salary, employee_age } = employee;
-
       return {
         id,
         name: employee_name,
         salary: employee_salary,
         age: employee_age
       };
-
     }));
   }
 }
