@@ -83,7 +83,6 @@ import { EmployeeComponent } from './employee/employee.component';
       { path: 'admin', data: {name: 'Admin'}, component: AdminComponent, canActivate: [AuthGuard]},
       {path: 'employee/:employeeId', data: { name: 'employee' }, component: EmployeeComponent},
       { path: '**', redirectTo: 'error'}
-
     ])
   ],
   providers: [],
