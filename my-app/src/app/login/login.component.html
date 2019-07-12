@@ -9,6 +9,14 @@
         <label for="pw">Password:</label>
         <input type="password" formControlName="password" id="pw">
     </div>
-    <input type="submit" (click)="logIn()" class="button" value="Register" >
+    <input type="submit" (click)="logIn()" class="button" value="Login" >
 </form>
 
+
+<h1>Guard On This Page!</h1>
+
+<h3>
+    Current access: {{access ? 'Allowed' : 'Disabled'}}
+</h3>
+
+<a routerLink="/users-list">Users</a>

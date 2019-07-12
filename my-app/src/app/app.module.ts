@@ -63,7 +63,7 @@ import { LoginComponent } from './login/login.component';
       { path: 'shipping', data: {name: 'Shipping'}, component: ShippingComponent},
       { path: 'wishlist', data: {name: 'Wishlist'}, component: WishlistComponent},
       { path: 'register-form', data: {name: 'Register'}, component: RegisterFormComponent },
-      { path: 'users-list', data: {name: 'Users'}, component: UsersListComponent },
+      { path: 'users-list', data: {name: 'Users'}, component: UsersListComponent, canActivate: [AuthGuard] },
       { path: 'currency', data: {name: 'Currency'}, component: CurrencyComponent},
       { path: 'exchange', data: {name: 'Exchange'}, component: ExchangeComponent},
       { path: 'dashboard', data: {name: 'Dashboard'}, component: DashboardComponent},
