@@ -33,7 +33,4 @@ export class EmployeeComponent implements OnInit {
     this.employeesService.delete(this.currentEmployee).subscribe();
     this.router.navigate(['employees']);
   }
-
-
-
 }
