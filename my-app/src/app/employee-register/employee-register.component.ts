@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeesService } from '../employees.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-register',
@@ -14,6 +15,7 @@ export class EmployeeRegisterComponent implements OnInit {
 
   constructor(
     private employeesService: EmployeesService,
+    private router: Router,
     private formBuilder: FormBuilder) {
     this.employeeRegister = formBuilder.group({
       name: ['', [Validators.required]],
@@ -28,6 +30,8 @@ export class EmployeeRegisterComponent implements OnInit {
 
   RegisterEmployees(newEmployee) {
     this.employeesService.RegisterEmployees(newEmployee).subscribe();
+    window.alert("Employee Registered!");
+    this.router.navigate(['employees']);
   }
-
+  
 }

@@ -8,9 +8,15 @@
 </div>
 
 <div class="wrap">
-    <button class="button" (click)="deleteAction()" (click)="delete()">Delete</button>
+    <button class="button" (click)="deleteAction()" (click)="popUp()">Delete</button>
 </div>
 
 <div *ngIf="!currentEmployee?.name&&!currentEmployee?.salary&&!currentEmployee?.age">
     <h1>cannot find user</h1>
 </div>
+
+<div class="popUp" *ngIf="pop" [@openClose]="popUp ? 'open': 'close'">
+    <h3>Are you sure?</h3>
+    <button (click)="delete()">Yes</button>
+    <button (click)="hide()">Cancel</button>
+</div> 

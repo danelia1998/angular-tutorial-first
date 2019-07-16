@@ -1,0 +1,17 @@
+.popUp {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: red;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px 100px;
+
+     h3 {
+        color: white;
+    }
+
+     button:first-of-type {
+        margin-right: 5px;
+    }
+}

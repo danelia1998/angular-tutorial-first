@@ -36,7 +36,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderService } from './loader.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,8 +61,9 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     EmployeesComponent,
     EmployeeRegisterComponent,
     EmployeeComponent,
-    MenuComponent,
     LoaderComponent,
+    MenuComponent,
+    EmployeeComponent
   ],
   imports: [
     HttpClientModule,
@@ -82,6 +82,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
       { path: 'wishlist', data: {name: 'Wishlist'}, component: WishlistComponent},
       { path: 'register-form', data: {name: 'Register'}, component: RegisterFormComponent },
       { path: 'users-list', data: {name: 'Users'}, component: UsersListComponent, canActivate: [AuthGuard] },
+      { path: 'employees/:id', data: { name: 'Employee' }, component: EmployeeComponent },
       { path: 'currency', data: {name: 'Currency'}, component: CurrencyComponent},
       { path: 'exchange', data: {name: 'Exchange'}, component: ExchangeComponent},
       { path: 'dashboard', data: {name: 'Dashboard'}, component: DashboardComponent},
@@ -102,6 +103,5 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
 ],
   bootstrap: [AppComponent]
-  
 })
 export class AppModule { }
