@@ -10,7 +10,7 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './register-form/register-form.component';
@@ -30,7 +30,12 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { MenuComponent } from './menu/menu.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderComponent } from './loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from './loader.service';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EmployeesComponent,
     EmployeeRegisterComponent,
     EmployeeComponent,
-    MenuComponent
+    MenuComponent,
+    LoaderComponent,
   ],
   imports: [
     HttpClientModule,
@@ -65,6 +71,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     FormsModule,
     NgxPaginationModule,
+    MatProgressSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -90,7 +97,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: '**', redirectTo: 'error'}
     ])
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+],
   bootstrap: [AppComponent]
   
 })
